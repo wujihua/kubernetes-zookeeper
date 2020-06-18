@@ -103,6 +103,7 @@ spec:
           --purge_interval=12 \
           --max_session_timeout=40000 \
           --min_session_timeout=4000 \
+          --whitelist=* \
           --log_level=INFO"
         readinessProbe:
           exec:

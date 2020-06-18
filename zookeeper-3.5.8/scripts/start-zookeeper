@@ -93,6 +93,8 @@ MAX_CLIENT_CNXNS=60
 SNAP_RETAIN_COUNT=3
 PURGE_INTERVAL=0
 SERVERS=1
+WHITELIST=*
+
 
 function print_usage() {
 echo "\
@@ -198,6 +200,7 @@ function create_config() {
     echo "maxSessionTimeout=$MAX_SESSION_TIMEOUT" >> $CONFIG_FILE
     echo "autopurge.snapRetainCount=$SNAP_RETAIN_COUNT" >> $CONFIG_FILE
     echo "autopurge.purgeInteval=$PURGE_INTERVAL" >> $CONFIG_FILE
+	echo "4lw.commands.whitelist=$WHITELIST" >> $CONFIG_FILE
      if [ $SERVERS -gt 1 ]; then
         print_servers >> $CONFIG_FILE
     fi
@@ -281,6 +284,9 @@ while getopts "$optspec" optchar; do
                     ;;
                 log_level=*)
                     LOG_LEVEL=${OPTARG##*=}
+                    ;;
+                whitelist=*)
+                    WHITELIST=${OPTARG##*=}
                     ;;
                 *)
                     echo "Unknown option --${OPTARG}" >&2
